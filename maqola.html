@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiberxavfsizlik Tarixi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+        }
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline::after {
+            content: "";
+            position: absolute;
+            width: 4px;
+            background: #1db954;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+        .timeline-item {
+            padding: 20px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #1db954;
+            border-radius: 50%;
+            top: 20px;
+            right: -10px;
+            z-index: 1;
+        }
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+        .timeline-content {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            position: relative;
+        }
+        .btn-primary {
+            background: #1db954;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #1ed760;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 20px;
+            }
+            .timeline-item {
+                width: 100%;
+                left: 0 !important;
+                text-align: left !important;
+                padding-left: 40px;
+            }
+            .timeline-item::before {
+                left: 10px !important;
+                right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">🛡️ Kiberxavfsizlik Tarixi</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>1960-yillar – Dastlabki kompyuter xavfsizligi</h4>
+                    <p>Ilk kompyuter tizimlari yaratildi va ma'lumotlarni himoyalash ehtiyoji paydo bo'ldi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>1980-yillar – Ilk kompyuter viruslari</h4>
+                    <p>Birinchi zararli dasturlar paydo bo‘ldi. 1986-yilda “Brain” virusi dunyoga keldi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>1990-yillar – Internet xavfsizligi muammosi</h4>
+                    <p>Internetning rivojlanishi bilan hacking va phishing hujumlari ortdi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2000-yillar – Kiberxavfsizlik sohasi shakllandi</h4>
+                    <p>Antivirus dasturlar ommalashdi va xalqaro kiberxavfsizlik standartlari yaratildi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2010-yillar – Ransomware va davlat darajasidagi hujumlar</h4>
+                    <p>2017-yilda WannaCry va NotPetya hujumlari butun dunyo bo'ylab tarqaldi.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h4>2020-yillar – Sun’iy intellekt va kiberxavfsizlik</h4>
+                    <p>AI asosida ishlaydigan xavfsizlik tizimlari va raqamli hujumlar yangi bosqichga chiqdi.</p>
+                </div>
+            </div>
+        </div>
+        <a href="index.html" class="btn btn-secondary mt-4 w-100">🏠 Asosiy sahifaga qaytish</a>
+    </div>
+</body>
+</html>

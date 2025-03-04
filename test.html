@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiberxavfsizlik Testi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #121212;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+        }
+        .question-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .btn-primary {
+            background: #1db954;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-primary:hover {
+            background: #1ed760;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        .result-box {
+            display: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .correct { background: #2ecc71; }
+        .average { background: #f1c40f; }
+        .fail { background: #e74c3c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">🔐 Kiberxavfsizlik Testi</h2>
+        <div id="questions-container"></div>
+        <button class="btn btn-primary mt-3 w-100" onclick="checkQuiz()">✅ Natijani tekshirish</button>
+        <div class="result-box mt-3" id="quiz-result"></div>
+        <a href="index.html" class="btn btn-secondary mt-3 w-100">🏠 Asosiy sahifaga qaytish</a>
+    </div>
+
+    <script>
+        const allQuestions = [
+            { question: "Phishing hujumlari nimaga qaratilgan?", options: ["Ma’lumotlarni o‘g‘irlash", "Viruslar tarqatish", "Internet tezligini pasaytirish"], correct: "A" },
+            { question: "Kuchli parol yaratish uchun nima qilish kerak?", options: ["Faqat raqam ishlatish", "Harflar, raqamlar va maxsus belgilar ishlatish", "Oddiy so‘zlar ishlatish"], correct: "B" },
+            { question: "'Two-Factor Authentication (2FA)' nimani anglatadi?", options: ["Ikki kishilik tizim", "Ikki bosqichli tekshirish", "Ikki marotaba login qilish"], correct: "B" },
+            { question: "VPN qanday maqsadda ishlatiladi?", options: ["Internet tezligini oshirish", "IP manzilni yashirish va xavfsizlikni oshirish", "Viruslarni yo‘q qilish"], correct: "B" },
+            { question: "Ransomware nima?", options: ["Ma’lumotlarni shifrlab, pul talab qilish", "Antivirus dasturi", "Internet sayti"], correct: "A" },
+            { question: "Eng xavfsiz Wi-Fi himoya usuli qaysi?", options: ["WEP", "WPA2", "SSID yashirish"], correct: "B" },
+            { question: "'Firewall' nima uchun ishlatiladi?", options: ["Internetni tezlashtirish", "Tarmoq xavfsizligini ta’minlash", "Viruslarni aniqlash"], correct: "B" },
+            { question: "'Brute Force Attack' nimani anglatadi?", options: ["Kuch bilan server buzish", "Tarmoq orqali ma’lumot uzatish", "Tasodifiy parollar sinash"], correct: "C" },
+            { question: "Eng yaxshi phishingdan himoyalanish usuli?", options: ["Har doim havolalarni tekshirish", "Yangi email yaratish", "Antivirus o‘rnatish"], correct: "A" },
+            { question: "Kompyuter viruslari qanday tarqaladi?", options: ["Fayllar orqali", "Elektron to‘lov orqali", "Kamerani yoqish orqali"], correct: "A" }
+        ];
+
+        let selectedQuestions = [];
+
+        function selectRandomQuestions() {
+            let tempQuestions = [...allQuestions];
+            selectedQuestions = [];
+
+            while (selectedQuestions.length < 5) {
+                let randomIndex = Math.floor(Math.random() * tempQuestions.length);
+                selectedQuestions.push(tempQuestions[randomIndex]);
+                tempQuestions.splice(randomIndex, 1);
+            }
+        }
+
+        function loadQuestions() {
+            selectRandomQuestions();
+            let container = document.getElementById("questions-container");
+            container.innerHTML = "";
+
+            selectedQuestions.forEach((q, index) => {
+                let questionHTML = `
+                    <div class="question-card">
+                        <label class="form-label"><strong>${index + 1}.</strong> ${q.question}</label>
+                        <div>
+                            <input type="radio" name="q${index}" value="A"> ${q.options[0]} <br>
+                            <input type="radio" name="q${index}" value="B"> ${q.options[1]} <br>
+                            <input type="radio" name="q${index}" value="C"> ${q.options[2]} <br>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += questionHTML;
+            });
+        }
+
+        function checkQuiz() {
+            let score = 0;
+            selectedQuestions.forEach((q, index) => {
+                let selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && selected.value === q.correct) {
+                    score++;
+                }
+            });
+
+            let resultBox = document.getElementById("quiz-result");
+            resultBox.style.display = "block";
+            
+            if (score === 5) {
+                resultBox.innerHTML = `✅ Ajoyib! <br> Natijangiz: <strong>${score}/5</strong>`;
+                resultBox.className = "result-box correct";
+            } else if (score >= 3) {
+                resultBox.innerHTML = `⚠️ Yaxshi, lekin yaxshiroq bo‘lishi mumkin! <br> Natijangiz: <strong>${score}/5</strong>`;
+                resultBox.className = "result-box average";
+            } else {
+                resultBox.innerHTML = `❌ Juda past natija! <br> Qayta urinib ko‘ring. Natijangiz: <strong>${score}/5</strong>`;
+                resultBox.className = "result-box fail";
+            }
+        }
+
+        window.onload = loadQuestions;
+    </script>
+</body>
+</html>
